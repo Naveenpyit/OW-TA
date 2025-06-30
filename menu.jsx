@@ -1,16 +1,16 @@
 import './menu.css';
-import react,{useState ,useEffect,useRef} from 'react';
-
+import Popup from '../components/popups';
+import {useState ,useEffect,useRef} from 'react';
 
 // https://github.com/Naveenpyit/OW-TA
 export default function Menu(){
-    let [open , setOpen] = useState(false);
+    let [open , setOpen] = useState('popClose');
     let pop = useRef(null);
 
     useEffect(()=>{
         function handleOpen(event){
             if(pop.current && !pop.current.contains(event.target)){
-                setOpen(false);
+                setOpen('popClose');
             }
         }
 
@@ -19,14 +19,18 @@ export default function Menu(){
             document.removeEventListener('mousedown',handleOpen);
         })
     },[]);
-
     return(
-        <div ref={pop} onClick={()=>{setOpen(true)}} className='menuDiv'>
-            {open && (
-                <div className='pop'>
-                    hi bro
+        <>
+            <div className='mainDiv'>
+                <div ref={pop} onClick={()=>{setOpen('popOpen')}} className='menuDiv'></div>
+            </div>
+
+            <div className='firstMain'>
+                <div>
+                <Popup action ={open} />
                 </div>
-            )}
-        </div>
+                <div>1234567890</div>
+            </div>
+        </>
     );
 }
