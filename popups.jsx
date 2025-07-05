@@ -5,7 +5,7 @@ export default function Popups({action}){
         <>
             <div className={action}>
                 <div className='topSection'>
-                    <div style={{height: '21%'}}>
+                    <div style={{height: '100px'}}>
                         <img className='profileSrc' src="src/assets/added image.jpg" alt="" />
                     </div>
                     <div className='linkWords'>
