@@ -45,7 +45,8 @@
 .profileSrc{
     border: 1px solid;
     border-radius: 50%;
-    width: 50%;
+    width: 90px;
+    height: 92px;
 }
 
 .profileSrc:hover{
