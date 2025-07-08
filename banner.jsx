@@ -1,5 +1,5 @@
 import './banner.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 export default function banner(){
     let [index , setIndex]=useState(0);
@@ -9,6 +9,15 @@ export default function banner(){
         '/assets/addedimage.jpg',
         '/assets/logo.png'
     ];
+
+    useEffect(()=>{
+        let timeIntreval = setInterval(()=>{
+            setIndex(previous => previous === (image.length-1) ? 0 : previous + 1);  
+        },10000);
+
+        return ()=> clearInterval(timeIntreval);
+    },[])
+
     return(
         <>
             <div className='container'>
@@ -25,9 +34,13 @@ export default function banner(){
                     <img style={{height: 'inherit',width: '100%'}} src={image[index]} alt="Logo" />
                 </div>
                 <div className='centerElement'>
-                    <div className='bannerCircle'>1</div>
-                    <div className='bannerCircle'>2</div>
-                    <div className='bannerCircle'>3</div>
+                    {
+                        image.map((key,indexI)=>{
+                            return <div onClick={()=>{
+                                setIndex(indexI)
+                            }} key={indexI} id={`brCirle${indexI}`} className={`${indexI === (image.length-1) ? 'bannerLength' : 'bannerCircle'} ${indexI === index ? 'active' : ''}`}></div>
+                        })
+                    }
                 </div>
                 <div onClick={()=>{
                     if(index == (image.length-1)){
